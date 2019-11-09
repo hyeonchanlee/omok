@@ -66,14 +66,20 @@ class Chat extends Component {
                     {player === 'black' ? <h6>Player Black</h6> : <h6>Player White</h6>}
                     <div className='d-flex h-100 justify-content-center'>
                         {this.props.player === player ? (
-                            <p className='align-self-center'>{this.props.user.name}</p>
+                            <div className='align-self-center text-center'>
+                                <p>{this.props.user.name}</p>
+                                <p>{Math.floor(this.props.myTime/60)} min {this.props.myTime%60} sec</p>
+                            </div>
                         ) : (
                             this.props.opponent === null ? (
                                 Array(5).fill().map((e, i) => {
                                     return <div className='spinner-grow spinner-grow-sm align-self-center mx-1' key={i}></div>
                                 })
                             ) : (
-                                <p className='align-self-center'>{this.props.opponent.name}</p>
+                                <div className='align-self-center text-center'>
+                                    <p>{this.props.opponent.name}</p>
+                                    <p>{Math.floor(this.props.oppTime/60)} min {this.props.oppTime%60} sec</p>
+                                </div>
                             )
                         )}
                     </div>

@@ -14,6 +14,9 @@ class Game extends Component {
         this.endpoint = 'http://localhost:5000';
         this.socket = io.connect(this.endpoint);
 
+        // Initialize timer for the game
+        this.timer = null;
+
         this.state = {
             rooms: [],
             roomId: null,
@@ -22,6 +25,8 @@ class Game extends Component {
             turn: null,
             board: Array(19).fill().map(x => Array(19).fill('transparent')),
             chat: [],
+            myTime: 300, // 5 minute timer for myself
+            oppTime: 300, // 5 minute timer for opponent
             gameWon: null
         };
 
@@ -29,6 +34,36 @@ class Game extends Component {
         this.baseState = this.state;
     }
 
+    // Count down a second for the player of turn, and check for time running out
+    tick = () => {
+        this.state.turn ?
+            this.setState(prevState => ({ myTime: prevState.myTime - 1 }))
+        :
+            this.setState(prevState => ({ oppTime: prevState.oppTime - 1 }));
+
+        if(this.state.mytime <= 0) {
+            this.socket.emit('resign', {
+                user: this.props.user
+            });
+            this.props.socket.emit('sendMessage', {
+                roomId: this.props.roomId,
+                user: null,
+                message: '-----' + this.props.user.name + ' loses on time'
+            });
+        }
+    }
+
+    // Start the game timer
+    startTimer = () => {
+        this.timer = setInterval(this.tick, 1000);
+    }
+
+    // Stop the game timer
+    stopTimer = () => {
+        clearInterval(this.timer);
+    }
+
+    // Check win conditions for the current board
     checkWinConditions = (player, x, y) => {
         const b = this.state.board;
 
@@ -38,6 +73,7 @@ class Game extends Component {
             if(b[x+i] && b[x+i][y] && b[x+i][y] === player) { sum_x++; }
             else { sum_x = 0; }
             if(sum_x >= 5) {
+                this.stopTimer();
                 this.setState({
                     turn: null,
                     gameWon: (player === this.state.player)
@@ -51,6 +87,7 @@ class Game extends Component {
             if(b[x] && b[x][y+j] && b[x][y+j] === player) { sum_y++; }
             else { sum_y = 0; }
             if(sum_y >= 5) {
+                this.stopTimer();
                 this.setState({
                     turn: null,
                     gameWon: (player === this.state.player)
@@ -66,12 +103,14 @@ class Game extends Component {
             if(b[x-k] && b[x-k][y+k] && b[x-k][y+k] === player) { sum_dl++; }
             else { sum_dl = 0; }
             if(sum_dr >= 5) {
+                this.stopTimer();
                 this.setState({ 
                     turn: null,
                     gameWon: (player === this.state.player) 
                 });
             }
             if(sum_dl >= 5) {
+                this.stopTimer();
                 this.setState({ 
                     turn: null,
                     gameWon: (player === this.state.player) 
@@ -130,7 +169,9 @@ class Game extends Component {
             this.setState({
                 opponent: user,
                 turn: (this.state.player === 'black')
-            })
+            });
+            // Start the game timer
+            this.startTimer();
         });
 
         // Player played turn
@@ -147,6 +188,7 @@ class Game extends Component {
 
         // Player resigned game
         this.socket.on('resigned', ({ user }) => {
+            this.stopTimer();
             this.setState({ 
                 turn: null,
                 gameWon: (user._id !== this.props.user._id)
