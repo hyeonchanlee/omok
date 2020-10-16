@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import dotenv from 'dotenv';
 import http from 'http';
+import cors from 'cors';
 
 import socketHandler from './game/socket.js';
 import passportConfig from './config/passport.js';
@@ -25,6 +26,17 @@ mongoose.connect(process.env.MONGO_URI, {
 const app = express();
 const server = http.Server(app);
 const PORT = process.env.PORT || 5000;
+
+// CORS
+const whitelist = ['http://localhost:3000'];
+const corsOptions = {
+    origin: (origin, callback) => {
+        whitelist.indexOf(origin) !== -1
+            ? callback(null, true)
+            : callback(new Error('Not allowed by CORS'));
+    }
+}
+app.use(cors(corsOptions));
 
 // Bodyparser Middleware
 app.use(express.json());

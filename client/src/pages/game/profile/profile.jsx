@@ -18,30 +18,30 @@ class Profile extends Component {
         };
     }
 
-    deleteAccount = () => {
-        const { user, authenticateUser } = this.props.auth;
-        const { setAlert } = this.props.alert;
+    // deleteAccount = () => {
+    //     const { user, authenticateUser } = this.props.auth;
+    //     const { setAlert } = this.props.alert;
 
-        axios.post('/user/delete', {
-                user: user
-            })
-            .then(res => {
-                setAlert(res.data.type, res.data.message);
-                if(res.data.type === 'success') {
-                    authenticateUser();
-                }
-                else {
-                    this.setState({ deleteAcc: false });
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
+    //     axios.post('/user/delete', {
+    //             user: user
+    //         })
+    //         .then(res => {
+    //             setAlert(res.data.type, res.data.message);
+    //             if(res.data.type === 'success') {
+    //                 authenticateUser();
+    //             }
+    //             else {
+    //                 this.setState({ deleteAcc: false });
+    //             }
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         });
+    // }
 
     render() {
         const { deleteAcc } = this.state;
-        const { user } = this.props.auth;
+        const { user, deleteUser } = this.props.auth;
 
         return (
             <div className='_profile'>
@@ -49,7 +49,10 @@ class Profile extends Component {
                     when={deleteAcc}
                     message='Do you really want to delete your account?'
                     acceptText='Delete'
-                    onAccept={this.deleteAccount}
+                    onAccept={() => { 
+                        deleteUser(); 
+                        this.setState({ deleteAcc: false }); 
+                    }}
                     rejectText='Cancel'
                     onReject={() => this.setState({ deleteAcc: false })}
                 />

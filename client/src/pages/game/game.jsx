@@ -28,7 +28,11 @@ class Game extends Component {
             winner: null
         }
 
-        this.socket = io.connect(process.env.REACT_APP_ENDPOINT);
+        this.socket = io.connect(process.env.REACT_APP_MODE === 'PRODUCTION'
+            ? process.env.REACT_APP_ENDPOINT_PROD
+            : process.env.REACT_APP_ENDPOINT_DEV
+        );
+
         this.timer = null;
     }
 
