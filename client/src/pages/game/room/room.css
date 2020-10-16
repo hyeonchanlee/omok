@@ -1,0 +1,32 @@
+._room {
+    flex-grow: 1;
+    width: 100%;
+    background-color: var(--black);
+}
+
+._room .wrapper {
+    display: flex;
+    margin: 0 auto;
+    padding: 20px;
+    width: 1000px;
+}
+
+._room .players {
+    flex: 3 1 auto;
+}
+
+._room .board {
+    flex: 7 1 auto;
+}
+
+@media (max-width: 1000px) {
+    ._room .wrapper{
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    ._room .wrapper {
+        flex-direction: column;
+    }
+}

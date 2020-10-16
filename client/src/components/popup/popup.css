@@ -1,0 +1,57 @@
+._popup {
+    background: rgba(0, 0, 0, .3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+._popup .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    padding: 30px;
+    width: 350px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: var(--white);
+    z-index: 1000;
+}
+
+._popup .message {
+    font-size: 16px;
+    color: var(--black);
+}
+
+._popup .button_group {
+    display: flex;
+    justify-content: flex-end;
+}
+
+._popup .button {
+    margin: 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+._popup .button:hover {
+    cursor: pointer;
+}
+
+._popup .accept {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+._popup .reject {
+    background-color: var(--gray60);
+    color: var(--white);
+}

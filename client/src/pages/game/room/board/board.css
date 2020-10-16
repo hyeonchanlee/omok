@@ -1,0 +1,108 @@
+._board {
+    position: relative;
+    height: auto;
+    padding-top: 100%;
+}
+
+._board .board {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('../../../../assets/images/board.jpg');
+}
+
+._board .row {
+    flex: 1;
+    display: flex;
+}
+
+._board .cell {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+._board .stone {
+    position: absolute;
+    height: 90%;
+    width: 90%;
+    top: 5%;
+    left: 5%;
+    border-radius: 50%;
+    z-index: 999;
+}
+
+._board .stone:hover {
+    cursor: pointer;
+}
+
+._board .stone.white {
+    background-color: var(--white);
+}
+
+._board .stone.black {
+    background-color: var(--black);
+}
+
+._board .top_left {
+    flex: 1 1 50%;
+    border-bottom: 1px solid var(--black);
+    border-right: 1px solid var(--black); 
+}
+
+._board .top_left.no_left {
+    border-bottom: none;
+}
+
+._board .top_left.no_top {
+    border-right: none;
+}
+
+._board .top_right {
+    flex: 1 1 50%;
+    border-left: 1px solid var(--black);
+    border-bottom: 1px solid var(--black);
+}
+
+._board .top_right.no_top {
+    border-left: none;
+}
+
+._board .top_right.no_right {
+    border-bottom: none;
+}
+
+._board .bottom_left {
+    flex: 1 1 50%;
+    border-right: 1px solid var(--black);
+    border-top: 1px solid var(--black);
+}
+
+._board .bottom_left.no_bottom {
+    border-right: none;
+}
+
+._board .bottom_left.no_left {
+    border-top: none;
+}
+
+._board .bottom_right {
+    flex: 1 1 50%;
+    border-top: 1px solid var(--black);
+    border-left: 1px solid var(--black);
+}
+
+._board .bottom_right.no_right {
+    border-top: none;
+}
+
+._board .bottom_right.no_bottom {
+    border-left: none;
+}

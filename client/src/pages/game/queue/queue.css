@@ -1,0 +1,84 @@
+._queue {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--black);
+}
+
+._queue .loading {
+    position: relative;
+    width: 150px;
+    height: 50px;
+}
+
+._queue .loading div {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--white);
+    animation: bounce 1.5s ease infinite;
+}
+
+._queue .loading div:nth-child(1) {
+    left: 0%;
+    animation-delay: 0s;
+}
+
+._queue .loading div:nth-child(2) {
+    left: 20%;
+    animation-delay: 0.2s;
+}
+
+._queue .loading div:nth-child(3) {
+    left: 40%;
+    animation-delay: 0.4s;
+}
+
+._queue .loading div:nth-child(4) {
+    left: 60%;
+    animation-delay: 0.6s;
+}
+
+._queue .loading div:nth-child(5) {
+    left: 80%;
+    animation-delay: 0.8s;
+}
+
+._queue .text {
+    color: var(--white);
+    animation: fade 1.5s ease infinite;
+}
+
+._queue .cancel {
+    margin-top: 30px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--gray60);
+    color: var(--white);
+}
+
+._queue .cancel:hover {
+    cursor: pointer;
+}
+
+@keyframes bounce {
+    0%, 50% {
+        top: 0px;
+    }
+    25% {
+        top: -25px;
+    }
+}
+
+@keyframes fade {
+    0%, 50% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 0.5;
+    }
+}

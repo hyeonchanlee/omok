@@ -1,0 +1,18 @@
+._footer {
+    display: flex;
+    height: 100px;
+    width: 100%;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 14px;
+}
+
+._footer .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0 auto;
+    padding: 20px;
+    height: 100%;
+    width: 1000px;
+}

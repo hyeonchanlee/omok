@@ -1,88 +1,113 @@
 import React, { Component } from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { 
+    Route, 
+    Switch, 
+    withRouter
+} from 'react-router-dom';
 import axios from 'axios';
 
-import Dashboard from './components/dashboard';
-import Game from './components/game';
-import Home from './components/home';
-import Login from './components/login';
-import Navbar from './components/navbar';
-import Register from './components/register';
-
-
-// Function for private routes (requires login)
-const PrivateRoute = ({ component: Component, data, ...rest }) => {
-    return <Route {...rest} render={() => (
-        data.user ? 
-            <Component {...data} /> 
-        : 
-            <Redirect to={{
-                pathname: '/users/login',
-                state: {
-                    type: 'warning',
-                    msg: 'You must be logged in first'
-                }
-            }} />
-    )} />
-}
+import Navbar from './components/navbar/navbar.jsx';
+import Footer from './components/footer/footer.jsx';
+import Login from './pages/login/login.jsx';
+import Register from './pages/register/register.jsx';
+import Game from './pages/game/game.jsx';
+import { AuthContext } from './contexts/auth.jsx';
+import { AlertContext } from './contexts/alert.jsx';
 
 class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            authenticated: null,
+            authenticated: null, 
             user: null,
-            alerts: {
-                error: '',
-                warning: '',
-                success: ''
-            }
+            alert: null
         };
     }
 
-    // Show alert messages to user
-    setAlert = (type, alert) => {
-        const newAlerts = this.state.alerts;
-        newAlerts[type] = alert;
-
-        this.setState({ alerts: newAlerts });
-    }
-
-    // Clear alert messages
-    clearAlerts = () => {
-        this.setState({ alerts: {
-            error: '',
-            warning: '',
-            success: ''
-        }});
-    }
-
-    // User is logged in
-    connectUser = (user) => {
+    setAlert = (type, message) => {
         this.setState({
-            authenticated: true,
-            user: user
+            alert: {
+                type: type, 
+                message: message
+            }
         });
     }
 
-    // User is not logged in
-    disconnectUser = () => {
+    clearAlert = () => {
         this.setState({
-            authenticated: false,
-            user: null
+            alert: null
         });
     }
 
-    // Authenticate user login status
-    authenticateUser = () => {
-        axios.get('/users/authenticate')
+    registerUser = (name, username, email, password) => {
+        axios.post('/user/register', {
+                name: name, 
+                username: username, 
+                email: email, 
+                password: password
+            })
+            .then(res => {
+                this.setAlert(res.data.type, res.data.message);
+                if(res.data.type === 'success') {
+                    // this.props.history.replace('/login');
+                    this.loginUser(email, password);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    loginUser = (email, password) => {
+        axios.post('/user/login', {
+                email: email, 
+                password: password
+            })
+            .then(res => {
+                this.setAlert(res.data.type, res.data.message);
+                if(res.data.type === 'success') {
+                    this.setState({
+                        authenticated: true, 
+                        user: res.data.user
+                    });
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    logoutUser = () => {
+        axios.get('/user/logout')
             .then(res => {
                 if(res.data.type === 'success') {
-                    this.connectUser(res.data.user);
+                    this.setState({
+                        authenticated: false, 
+                        user: null
+                    });
+                    this.setAlert(res.data.type, res.data.message);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    authenticateUser = () => {
+        axios.get('/user/authenticate')
+            .then(res => {
+                if(res.data.type === 'success') {
+                    this.setState({
+                        authenticated: true, 
+                        user: res.data.user
+                    });
                 }
                 else {
-                    this.disconnectUser();
+                    this.setState({
+                        authenticated: false, 
+                        user: null
+                    });
                 }
             })
             .catch(err => {
@@ -91,42 +116,40 @@ class App extends Component {
     }
 
     componentDidMount() {
-        // console.log('app-mount');
-
-        // Authenticate user whenever page reloads
         this.authenticateUser();
     }
 
     render() {
-        // console.log('app');
+        if(this.state.authenticated === null) return null;
 
-        // Wait for user authentication before rendering
-        if(this.state.authenticated === null) { return null }
-
-        // Props to pass to child components
-        const props = {
-            ...this.state,
-            endpoint: this.endpoint,
-            setAlert: this.setAlert,
-            clearAlerts: this.clearAlerts,
-            connectUser: this.connectUser,
-            disconnectUser: this.disconnectUser,
-            userJoinedRoom: this.userJoinedRoom,
-            userLeftRoom: this.userLeftRoom
+        const auth = {
+            user: this.state.user, 
+            registerUser: this.registerUser, 
+            loginUser: this.loginUser, 
+            logoutUser: this.logoutUser, 
+            authenticateUser: this.authenticateUser
         };
 
-        return (
-            <div>
-                <Navbar />
+        const alert = {
+            ...this.state.alert, 
+            setAlert: this.setAlert, 
+            clearAlert: this.clearAlert
+        }
 
-                <Route exact path='/' render={() => ( <Home {...props} /> )} />
-                <Route path='/users/register' render={() => ( <Register {...props} /> )} />
-                <Route path='/users/login' render={() => ( <Login {...props} /> )} />
-                <PrivateRoute path='/dashboard' component={Dashboard} data={props} />
-                <PrivateRoute path='/game' component={Game} data={props} />
-            </div>
+        return (
+            <AuthContext.Provider value={auth}>
+                <AlertContext.Provider value={alert}>
+                    <Navbar auth={auth} />
+                    <Switch>
+                        <Route path='/login' component={Login} />
+                        <Route path='/register' component={Register} />
+                        <Route path='/' component={Game} />
+                    </Switch>
+                    <Footer />
+                </AlertContext.Provider>
+            </AuthContext.Provider>
         );
     }
 }
 
-export default App;
+export default withRouter(App);

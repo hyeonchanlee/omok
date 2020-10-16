@@ -1,36 +1,39 @@
-const express = require('express');
-const session = require('express-session');
-const mongoose = require('mongoose');
-const passport = require('passport');
+import express from 'express';
+import session from 'express-session';
+import mongoose from 'mongoose';
+import passport from 'passport';
+import dotenv from 'dotenv';
+import http from 'http';
 
-const app = express();
-const server = require('http').Server(app);
+import socketHandler from './game/socket.js';
+import passportConfig from './config/passport.js';
+import userRouter from './routes/user.route.js';
 
-// Dotenv config
-require('dotenv').config();
+passportConfig(passport);
+dotenv.config();
 
-// Passport Config
-require('./config/passport')(passport);
-
-// Connect to Database
-mongoose.connect(process.env.MONGO_URI, { 
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+        useNewUrlParser: true, 
         useUnifiedTopology: true, 
-        useNewUrlParser: true 
+        useCreateIndex: true
     })
-    .then(() => console.log('MongoDB Connected...'))
+    .then(() => console.log('MongoDB Connected!'))
     .catch(err => console.log(err));
 
-// Socket.IO Event Handler
-require('./config/socket')(server);
+// Initialize Express Server and Port
+const app = express();
+const server = http.Server(app);
+const PORT = process.env.PORT || 5000;
 
-// Bodyparser
-app.use(express.urlencoded({ extended: true }));
+// Bodyparser Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Express Session
+// Session Middleware
 app.use(session({
-    secret: 'secret',
-    resave: true,
+    secret: 'secret', 
+    resave: true, 
     saveUninitialized: true
 }));
 
@@ -39,8 +42,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use('/users', require('./routes/users'));
+app.use('/user', userRouter);
 
-const PORT = process.env.PORT;
+// Socket IO Handler
+socketHandler(server);
 
-server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+server.listen(PORT, err => {
+    if(err) console.log('Error setting up server!');
+    else console.log('Server listeneing on Port', PORT);
+});

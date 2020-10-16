@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './App';
+import './constants/globals.css';
+import './constants/colors.css';
+import './constants/fonts.css';
 
-// Render the App
 ReactDOM.render(
-    <BrowserRouter>
+    <Router>
         <App />
-    </BrowserRouter>
+    </Router>
     , document.getElementById('root')
 );

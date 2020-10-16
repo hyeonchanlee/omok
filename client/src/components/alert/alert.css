@@ -1,0 +1,17 @@
+._alert {
+    margin: 5px 0;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+._alert .error {
+    color: var(--red);
+}
+
+._alert .warning {
+    color: var(--yellow);
+}
+
+._alert .success {
+    color: var(--green);
+}

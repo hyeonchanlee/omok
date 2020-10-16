@@ -1,0 +1,42 @@
+._players {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+._players .player {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 10px 5px 0;
+    padding: 20px;
+    height: 50%;
+    border: 2px solid var(--white);
+    border-radius: 10px;
+}
+
+._players .black {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+._players .white {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+._players .turn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+._players .my_turn {
+    color: var(--green);
+}
+
+._players p {
+    line-height: 24px;
+}
