@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon start.js",
     "client": "npm start --prefix client",
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node start.js", 
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "HyeonChan Lee",
@@ -28,5 +29,8 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "socket.io": "^2.3.0"
+  }, 
+  "engines": {
+    "node": "10.16.0"
   }
 }
