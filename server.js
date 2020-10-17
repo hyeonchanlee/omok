@@ -39,7 +39,7 @@ const corsOptions = {
             : callback(new Error('Not allowed by CORS'));
     }
 };
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Bodyparser Middleware
 app.use(express.json());
