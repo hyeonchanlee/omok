@@ -36,7 +36,7 @@ const corsOptions = {
     origin: (origin, callback) => {
         (whitelist.indexOf(origin) !== -1 || !origin)
             ? callback(null, true)
-            : callback(new Error('Not allowed by CORS'));
+            : callback(new Error('Not allowed by CORS!'));
     }
 };
 app.use(cors(corsOptions));
