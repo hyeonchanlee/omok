@@ -30,7 +30,7 @@ const PORT = process.env.PORT || 5000;
 // CORS
 const whitelist = [
     'http://localhost:3000', 
-    'http://hyeonchanlee.github.io/gomoku'
+    'http://hyeonchanlee.github.io'
 ];
 const corsOptions = {
     origin: (origin, callback) => {
@@ -39,7 +39,7 @@ const corsOptions = {
             : callback(new Error('Not allowed by CORS'));
     }
 };
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Bodyparser Middleware
 app.use(express.json());
