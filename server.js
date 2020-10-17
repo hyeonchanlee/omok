@@ -28,7 +28,7 @@ const server = http.Server(app);
 const PORT = process.env.PORT || 5000;
 
 // CORS
-const whitelist = ['http://localhost:3000', 'https://hyeonchanlee.github.io/gomoku/'];
+const whitelist = ['http://localhost:3000', 'http://hyeonchanlee.github.io/gomoku/'];
 const corsOptions = {
     origin: (origin, callback) => {
         whitelist.indexOf(origin) !== -1
@@ -52,13 +52,6 @@ app.use(session({
 // Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
-    next();
-});
 
 // Routes
 app.use('/user', userRouter);
