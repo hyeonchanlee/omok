@@ -53,18 +53,20 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
+    next();
+});
+
 // Routes
 app.use('/user', userRouter);
 
 // Socket IO Handler
 socketHandler(server);
 
-app.listen(PORT, err => {
+server.listen(PORT, err => {
     if(err) console.log('Error setting up server!');
     else console.log('Server listeneing on Port', PORT);
 });
-
-// server.listen(PORT, err => {
-//     if(err) console.log('Error setting up server!');
-//     else console.log('Server listeneing on Port', PORT);
-// });
