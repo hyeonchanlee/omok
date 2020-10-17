@@ -30,7 +30,7 @@ const PORT = process.env.PORT || 5000;
 // CORS
 const whitelist = [
     'http://localhost:3000', 
-    'http://hyeonchanlee.github.io'
+    'https://hyeonchanlee.github.io'
 ];
 const corsOptions = {
     origin: (origin, callback) => {
