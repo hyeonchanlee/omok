@@ -1,9 +1,9 @@
 {
-  "homepage": "http://hyeonchanlee.github.io/gomoku", 
+  "homepage": "http://hyeonchanlee.github.io/omok", 
   "name": "client",
   "version": "0.0.1",
   "private": true,
-  "description": "Play game of gomoku online!",
+  "description": "Play game of Omok online!",
   "main": "index.jsx",
   "scripts": {
     "predeploy": "react-scripts build", 
@@ -13,6 +13,9 @@
   },
   "author": "HyeonChan Lee",
   "license": "ISC",
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
+  },
   "dependencies": {
     "axios": "^0.20.0",
     "dotenv": "^8.2.0",
@@ -34,9 +37,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^3.1.0"
   },
   "proxy": "http://localhost:5000"
 }

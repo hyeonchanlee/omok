@@ -18,27 +18,6 @@ class Profile extends Component {
         };
     }
 
-    // deleteAccount = () => {
-    //     const { user, authenticateUser } = this.props.auth;
-    //     const { setAlert } = this.props.alert;
-
-    //     axios.post('/user/delete', {
-    //             user: user
-    //         })
-    //         .then(res => {
-    //             setAlert(res.data.type, res.data.message);
-    //             if(res.data.type === 'success') {
-    //                 authenticateUser();
-    //             }
-    //             else {
-    //                 this.setState({ deleteAcc: false });
-    //             }
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         });
-    // }
-
     render() {
         const { deleteAcc } = this.state;
         const { user, deleteUser } = this.props.auth;
