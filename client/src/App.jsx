@@ -59,7 +59,6 @@ class App extends Component {
             .then(res => {
                 this.setAlert(res.data.type, res.data.message);
                 if(res.data.type === 'success') {
-                    // this.props.history.replace('/login');
                     this.loginUser(email, password);
                 }
             })
