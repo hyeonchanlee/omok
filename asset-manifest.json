@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/gomoku/static/css/main.9ac9d177.chunk.css",
-    "main.js": "/gomoku/static/js/main.a5779280.chunk.js",
-    "main.js.map": "/gomoku/static/js/main.a5779280.chunk.js.map",
-    "runtime-main.js": "/gomoku/static/js/runtime-main.1d24e66b.js",
-    "runtime-main.js.map": "/gomoku/static/js/runtime-main.1d24e66b.js.map",
-    "static/js/2.f35fb4f3.chunk.js": "/gomoku/static/js/2.f35fb4f3.chunk.js",
-    "static/js/2.f35fb4f3.chunk.js.map": "/gomoku/static/js/2.f35fb4f3.chunk.js.map",
-    "index.html": "/gomoku/index.html",
-    "precache-manifest.52216281fa19ffb40a47d411aa95f782.js": "/gomoku/precache-manifest.52216281fa19ffb40a47d411aa95f782.js",
-    "service-worker.js": "/gomoku/service-worker.js",
-    "static/css/main.9ac9d177.chunk.css.map": "/gomoku/static/css/main.9ac9d177.chunk.css.map",
-    "static/js/2.f35fb4f3.chunk.js.LICENSE.txt": "/gomoku/static/js/2.f35fb4f3.chunk.js.LICENSE.txt",
-    "static/media/fonts.css": "/gomoku/static/media/Typo Formal Regular Demo.1e3ced5f.otf",
-    "static/media/board.css": "/gomoku/static/media/board.8b67dc09.jpg"
+    "main.css": "/omok/static/css/main.3a39657f.chunk.css",
+    "main.js": "/omok/static/js/main.9dfa8d4c.chunk.js",
+    "main.js.map": "/omok/static/js/main.9dfa8d4c.chunk.js.map",
+    "runtime-main.js": "/omok/static/js/runtime-main.050d5148.js",
+    "runtime-main.js.map": "/omok/static/js/runtime-main.050d5148.js.map",
+    "static/js/2.7a0088a0.chunk.js": "/omok/static/js/2.7a0088a0.chunk.js",
+    "static/js/2.7a0088a0.chunk.js.map": "/omok/static/js/2.7a0088a0.chunk.js.map",
+    "index.html": "/omok/index.html",
+    "precache-manifest.a3403cce9d48774b3c72475c85da7aba.js": "/omok/precache-manifest.a3403cce9d48774b3c72475c85da7aba.js",
+    "service-worker.js": "/omok/service-worker.js",
+    "static/css/main.3a39657f.chunk.css.map": "/omok/static/css/main.3a39657f.chunk.css.map",
+    "static/js/2.7a0088a0.chunk.js.LICENSE.txt": "/omok/static/js/2.7a0088a0.chunk.js.LICENSE.txt",
+    "static/media/fonts.css": "/omok/static/media/Louis George Cafe.a617b62c.ttf",
+    "static/media/board.css": "/omok/static/media/board.8b67dc09.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.1d24e66b.js",
-    "static/js/2.f35fb4f3.chunk.js",
-    "static/css/main.9ac9d177.chunk.css",
-    "static/js/main.a5779280.chunk.js"
+    "static/js/runtime-main.050d5148.js",
+    "static/js/2.7a0088a0.chunk.js",
+    "static/css/main.3a39657f.chunk.css",
+    "static/js/main.9dfa8d4c.chunk.js"
   ]
 }
