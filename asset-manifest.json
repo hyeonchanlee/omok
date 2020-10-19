@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/omok/static/css/main.3a39657f.chunk.css",
-    "main.js": "/omok/static/js/main.9dfa8d4c.chunk.js",
-    "main.js.map": "/omok/static/js/main.9dfa8d4c.chunk.js.map",
-    "runtime-main.js": "/omok/static/js/runtime-main.050d5148.js",
-    "runtime-main.js.map": "/omok/static/js/runtime-main.050d5148.js.map",
-    "static/js/2.7a0088a0.chunk.js": "/omok/static/js/2.7a0088a0.chunk.js",
-    "static/js/2.7a0088a0.chunk.js.map": "/omok/static/js/2.7a0088a0.chunk.js.map",
-    "index.html": "/omok/index.html",
-    "precache-manifest.a3403cce9d48774b3c72475c85da7aba.js": "/omok/precache-manifest.a3403cce9d48774b3c72475c85da7aba.js",
-    "service-worker.js": "/omok/service-worker.js",
-    "static/css/main.3a39657f.chunk.css.map": "/omok/static/css/main.3a39657f.chunk.css.map",
-    "static/js/2.7a0088a0.chunk.js.LICENSE.txt": "/omok/static/js/2.7a0088a0.chunk.js.LICENSE.txt",
-    "static/media/fonts.css": "/omok/static/media/Louis George Cafe.a617b62c.ttf",
-    "static/media/board.css": "/omok/static/media/board.8b67dc09.jpg"
+    "main.css": "/static/css/main.3c4e6975.chunk.css",
+    "main.js": "/static/js/main.9dfa8d4c.chunk.js",
+    "main.js.map": "/static/js/main.9dfa8d4c.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.09b85ec0.js",
+    "runtime-main.js.map": "/static/js/runtime-main.09b85ec0.js.map",
+    "static/js/2.4d0df537.chunk.js": "/static/js/2.4d0df537.chunk.js",
+    "static/js/2.4d0df537.chunk.js.map": "/static/js/2.4d0df537.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.6d135194741f868fbd232e68e6f27f3a.js": "/precache-manifest.6d135194741f868fbd232e68e6f27f3a.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.3c4e6975.chunk.css.map": "/static/css/main.3c4e6975.chunk.css.map",
+    "static/js/2.4d0df537.chunk.js.LICENSE.txt": "/static/js/2.4d0df537.chunk.js.LICENSE.txt",
+    "static/media/fonts.css": "/static/media/Louis George Cafe.a617b62c.ttf",
+    "static/media/board.css": "/static/media/board.8b67dc09.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.050d5148.js",
-    "static/js/2.7a0088a0.chunk.js",
-    "static/css/main.3a39657f.chunk.css",
+    "static/js/runtime-main.09b85ec0.js",
+    "static/js/2.4d0df537.chunk.js",
+    "static/css/main.3c4e6975.chunk.css",
     "static/js/main.9dfa8d4c.chunk.js"
   ]
 }
