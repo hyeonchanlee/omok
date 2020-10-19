@@ -31,7 +31,7 @@ const PORT = process.env.PORT || 5000;
 const whitelist = [
     'http://localhost:3000', 
     'https://hyeonchanlee.github.io', 
-    'http://www.omokonline.com'
+    'https://www.omokonline.com'
 ];
 const corsOptions = {
     origin: (origin, callback) => {
