@@ -5,6 +5,7 @@ import {
     withRouter
 } from 'react-router-dom';
 import axios from 'axios';
+import dotenv from 'dotenv';
 
 import Navbar from './components/navbar/navbar.jsx';
 import Footer from './components/footer/footer.jsx';
@@ -14,8 +15,14 @@ import Game from './pages/game/game.jsx';
 import { AuthContext } from './contexts/auth.jsx';
 import { AlertContext } from './contexts/alert.jsx';
 
-import dotenv from 'dotenv';
 dotenv.config();
+
+const instance = axios.create({
+    withCredentials: true, 
+    baseURL: process.env.REACT_APP_MODE === 'PRODUCTION' 
+        ? process.env.REACT_APP_ENDPOINT_PROD
+        : process.env.REACT_APP_ENDPOINT_DEV
+});
 
 class App extends Component {
     constructor(props) {
@@ -26,12 +33,6 @@ class App extends Component {
             user: null,
             alert: null
         };
-
-        this.server = process.env.REACT_APP_MODE === 'PRODUCTION' 
-            ? process.env.REACT_APP_ENDPOINT_PROD
-            : process.env.REACT_APP_ENDPOINT_DEV;
-
-        console.log(this.server);
     }
 
     setAlert = (type, message) => {
@@ -50,7 +51,7 @@ class App extends Component {
     }
 
     registerUser = (name, username, email, password) => {
-        axios.post(`${this.server}/user/register`, {
+        instance.post('/user/register', {
                 name: name, 
                 username: username, 
                 email: email, 
@@ -68,7 +69,7 @@ class App extends Component {
     }
 
     loginUser = (email, password) => {
-        axios.post(`${this.server}/user/login`, {
+        instance.post('/user/login', {
                 email: email, 
                 password: password
             })
@@ -87,7 +88,7 @@ class App extends Component {
     }
 
     logoutUser = () => {
-        axios.get(`${this.server}/user/logout`)
+        instance.get('/user/logout')
             .then(res => {
                 if(res.data.type === 'success') {
                     this.setState({
@@ -105,7 +106,7 @@ class App extends Component {
     deleteUser = () => {
         const { user } = this.state;
 
-        axios.post(`${this.server}/user/delete`, {
+        instance.post('/user/delete', {
                 user: user
             })
             .then(res => {
@@ -120,7 +121,7 @@ class App extends Component {
     }
 
     authenticateUser = () => {
-        axios.get(`${this.server}/user/authenticate`)
+        instance.get('/user/authenticate')
             .then(res => {
                 if(res.data.type === 'success') {
                     this.setState({
