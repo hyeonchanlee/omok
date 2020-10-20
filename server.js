@@ -51,8 +51,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: 'keyboard cat', 
     resave: false, 
-    saveUninitialized: true, 
-    cookie: { secure: true }
+    saveUninitialized: true
 }));
 
 // Passport Middleware
