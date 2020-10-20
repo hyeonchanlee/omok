@@ -105,6 +105,7 @@ userRouter.get('/logout', (req, res) => {
 });
 
 userRouter.get('/authenticate', (req, res) => {
+    console.log(req.isAuthenticated());
     if(req.isAuthenticated()) {
         return res.send({
             type: 'success', 

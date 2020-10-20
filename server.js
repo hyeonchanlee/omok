@@ -34,6 +34,7 @@ const whitelist = [
     'https://www.omokonline.com'
 ];
 const corsOptions = {
+    credentials: true, 
     origin: (origin, callback) => {
         (whitelist.indexOf(origin) !== -1 || !origin)
             ? callback(null, true)
