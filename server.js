@@ -48,6 +48,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.set('trust proxy', 1);
+
 // Session Middleware
 app.use(session({
     secret: 'keyboard dog', 
