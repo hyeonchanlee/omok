@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session';
+import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import dotenv from 'dotenv';
@@ -47,6 +48,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cookieParser());
 app.enable('trust proxy');
 
 // Session Middleware
