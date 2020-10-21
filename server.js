@@ -59,8 +59,8 @@ app.use(session({
     saveUninitialized: true, 
     cookie: {
         maxAge: (60 * 60 * 1000), 
-        sameSite: true, 
-        httpOnly: true, 
+        // sameSite: true, 
+        // httpOnly: true, 
         proxy: true, 
         secure: process.env.NPM_CONFIG_PRODUCTION
     }
