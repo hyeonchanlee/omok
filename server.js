@@ -35,11 +35,11 @@ const whitelist = [
 ];
 const corsOptions = {
     credentials: true, 
-    // origin: (origin, callback) => {
-    //     (whitelist.indexOf(origin) !== -1 || !origin)
-    //         ? callback(null, true)
-    //         : callback(new Error('Not allowed by CORS!'));
-    // }
+    origin: (origin, callback) => {
+        (whitelist.indexOf(origin) !== -1 || !origin)
+            ? callback(null, true)
+            : callback(new Error('Not allowed by CORS!'));
+    }
 };
 app.use(cors(corsOptions));
 
