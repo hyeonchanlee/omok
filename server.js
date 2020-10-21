@@ -13,6 +13,8 @@ import userRouter from './routes/user.route.js';
 passportConfig(passport);
 dotenv.config();
 
+const PORT = process.env.PORT || 5000;
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
         useNewUrlParser: true, 
@@ -25,7 +27,6 @@ mongoose.connect(process.env.MONGO_URI, {
 // Initialize Express Server and Port
 const app = express();
 const server = http.Server(app);
-const PORT = process.env.PORT || 5000;
 
 // CORS
 const whitelist = [
@@ -51,7 +52,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: 'keyboard dog', 
     resave: false, 
-    saveUninitialized: true
+    saveUninitialized: true, 
+    cookie: {
+        maxAge: (60 * 60 * 1000), 
+        httpOnly: false, 
+        secure:true
+    }
 }));
 
 // Passport Middleware
