@@ -14,8 +14,6 @@ import userRouter from './routes/user.route.js';
 passportConfig(passport);
 dotenv.config();
 
-const MongoStore = require('connect-mongostore')(session);
-
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
         useNewUrlParser: true, 
@@ -61,8 +59,7 @@ app.use(session({
     proxy: true, 
     cookie: {
         secure: true
-    }, 
-    store: new MongoStore({ url: process.env.MONGO_URI })
+    }
 }));
 
 // Passport Middleware
