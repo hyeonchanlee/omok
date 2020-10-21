@@ -49,7 +49,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Session Middleware
 app.use(session({
-    secret: 'keyboard cat', 
+    secret: 'keyboard dog', 
     resave: false, 
     saveUninitialized: true
 }));
