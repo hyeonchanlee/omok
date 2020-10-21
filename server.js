@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import dotenv from 'dotenv';
-// import http from 'http';
+import http from 'http';
 import cors from 'cors';
 
 import socketHandler from './game/socket.js';
@@ -25,7 +25,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Initialize Express Server and Port
 const app = express();
-// const server = http.Server(app);
+const server = http.Server(app);
 const PORT = process.env.PORT || 5000;
 
 // CORS
@@ -48,18 +48,18 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cookieParser());
-app.enable('trust proxy');
+// app.use(cookieParser());
+// app.enable('trust proxy');
 
 // Session Middleware
 app.use(session({
     secret: 'keyboard dog', 
     resave: false, 
     saveUninitialized: true, 
-    proxy: true, 
-    cookie: {
-        secure: true
-    }
+    // proxy: true, 
+    // cookie: {
+    //     secure: true
+    // }
 }));
 
 // Passport Middleware
@@ -69,7 +69,7 @@ app.use(passport.session());
 // Routes
 app.use('/user', userRouter);
 
-const server = app.listen(PORT, err => {
+server.listen(PORT, err => {
     if(err) console.log('Error setting up server!');
     else console.log('Server listeneing on Port', PORT);
 });
