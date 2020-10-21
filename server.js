@@ -52,7 +52,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 if(process.env.NPM_CONFIG_PRODUCTION) {
-    app.set('trust proxy', 1);
+    app.set('trust proxy', true);
 }
 
 // Session Middleware
@@ -65,22 +65,9 @@ app.use(session({
         sameSite: true, 
         httpOnly: true, 
         proxy: true, 
-        secure: process.env.NPM_CONFIG_PRODUCTION
+        secure: process.env.NPM_CONFIG_PRODUCTION || false
     }
 }));
-
-app.use(function(req,res,next){
-    res.locals.user = req.user || null;
-    if(req.session.views){
-      req.session.views += 1
-      req.session.save();
-    }else{
-      req.session.views = 1
-      req.session.save();
-    }
-    console.log('req.session.views', req.session.views)
-    next();
-  })
 
 // Passport Middleware
 app.use(passport.initialize());
