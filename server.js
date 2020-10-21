@@ -14,6 +14,8 @@ import userRouter from './routes/user.route.js';
 passportConfig(passport);
 dotenv.config();
 
+const MongoStore = require('connect-mongostore')(session);
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
         useNewUrlParser: true, 
@@ -48,18 +50,19 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(cookieParser());
-// app.enable('trust proxy');
+app.use(cookieParser());
+app.enable('trust proxy');
 
 // Session Middleware
 app.use(session({
     secret: 'keyboard dog', 
     resave: false, 
     saveUninitialized: true, 
-    // proxy: true, 
-    // cookie: {
-    //     secure: true
-    // }
+    proxy: true, 
+    cookie: {
+        secure: true
+    }, 
+    store: new MongoStore({ url: process.env.MONGO_URI })
 }));
 
 // Passport Middleware
