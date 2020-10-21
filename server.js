@@ -37,9 +37,12 @@ const whitelist = [
 const corsOptions = {
     credentials: true, 
     origin: (origin, callback) => {
-        (whitelist.indexOf(origin) !== -1 || !origin)
-            ? callback(null, true)
-            : callback(new Error('Not allowed by CORS!'));
+        if(whitelist.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error('Not allowed by CORS!'));
+        }
     }
 };
 app.use(cors(corsOptions));
@@ -54,7 +57,7 @@ if(process.env.NPM_CONFIG_PRODUCTION) {
 
 // Session Middleware
 app.use(session({
-    secret: 'keyboard dog', 
+    secret: process.env.SESSION_SECRET || 'secret', 
     resave: false, 
     saveUninitialized: true, 
     cookie: {
@@ -65,6 +68,19 @@ app.use(session({
         secure: process.env.NPM_CONFIG_PRODUCTION
     }
 }));
+
+app.use(function(req,res,next){
+    res.locals.user = req.user || null;
+    if(req.session.views){
+      req.session.views += 1
+      req.session.save();
+    }else{
+      req.session.views = 1
+      req.session.save();
+    }
+    console.log('req.session.views', req.session.views)
+    next();
+  })
 
 // Passport Middleware
 app.use(passport.initialize());

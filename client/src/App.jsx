@@ -21,7 +21,10 @@ const instance = axios.create({
     withCredentials: true, 
     baseURL: process.env.REACT_APP_MODE === 'PRODUCTION' 
         ? process.env.REACT_APP_ENDPOINT_PROD
-        : process.env.REACT_APP_ENDPOINT_DEV
+        : process.env.REACT_APP_ENDPOINT_DEV, 
+    headers: {
+        'Content-Type': 'application/json',
+    }
 });
 
 class App extends Component {
