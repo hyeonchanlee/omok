@@ -1,6 +1,5 @@
 import express from 'express';
 import session from 'express-session';
-import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import dotenv from 'dotenv';
@@ -36,11 +35,11 @@ const whitelist = [
 ];
 const corsOptions = {
     credentials: true, 
-    origin: (origin, callback) => {
-        (whitelist.indexOf(origin) !== -1 || !origin)
-            ? callback(null, true)
-            : callback(new Error('Not allowed by CORS!'));
-    }
+    // origin: (origin, callback) => {
+    //     (whitelist.indexOf(origin) !== -1 || !origin)
+    //         ? callback(null, true)
+    //         : callback(new Error('Not allowed by CORS!'));
+    // }
 };
 app.use(cors(corsOptions));
 
@@ -48,18 +47,11 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cookieParser());
-app.enable('trust proxy');
-
 // Session Middleware
 app.use(session({
     secret: 'keyboard dog', 
     resave: false, 
-    saveUninitialized: true, 
-    proxy: true, 
-    cookie: {
-        secure: true
-    }
+    saveUninitialized: true
 }));
 
 // Passport Middleware
