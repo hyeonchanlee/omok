@@ -14,6 +14,7 @@ passportConfig(passport);
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
+console.log(process.env.NPM_CONFIG_PRODUCTION);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
@@ -48,9 +49,9 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-if(process.env.NPM_CONFIG_PRODUCTION) {
-    app.set('trust proxy', 1);
-}
+// if(process.env.NPM_CONFIG_PRODUCTION) {
+//     app.set('trust proxy', 1);
+// }
 
 // Session Middleware
 app.use(session({
@@ -62,7 +63,7 @@ app.use(session({
         // sameSite: true, 
         // httpOnly: true, 
         proxy: true, 
-        secure: process.env.NPM_CONFIG_PRODUCTION
+        // secure: process.env.NPM_CONFIG_PRODUCTION
     }
 }));
 
