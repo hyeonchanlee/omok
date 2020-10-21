@@ -42,6 +42,7 @@ const corsOptions = {
     }
 };
 app.use(cors(corsOptions));
+app.enable('trust proxy');
 
 // Bodyparser Middleware
 app.use(express.json());
@@ -51,7 +52,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: 'keyboard dog', 
     resave: false, 
-    saveUninitialized: true
+    saveUninitialized: true, 
+    proxy: true
 }));
 
 // Passport Middleware
