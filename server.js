@@ -14,7 +14,7 @@ passportConfig(passport);
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
-console.log(process.env.NPM_CONFIG_PRODUCTION);
+console.log(process.env);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
