@@ -66,7 +66,7 @@ app.use(session({
         url: process.env.MONGO_URI
     }), 
     cookie: {
-        maxAge: (60 * 60 * 1000), 
+        maxAge: (14 * 24 * 60 * 60 * 1000), 
         sameSite: true, 
         httpOnly: true, 
         proxy: true, 
