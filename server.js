@@ -24,6 +24,8 @@ mongoose.connect(process.env.MONGO_URI, {
     .then(() => console.log('MongoDB Connected!'))
     .catch(err => console.log(err));
 
+const MongoStore = require('connect-mongo')(session);
+
 // Initialize Express Server and Port
 const app = express();
 const server = http.Server(app);
@@ -60,6 +62,9 @@ app.use(session({
     secret: process.env.SESSION_SECRET || 'secret', 
     resave: false, 
     saveUninitialized: true, 
+    store: new MongoStore({ 
+        url: process.env.MONGO_URI
+    }), 
     cookie: {
         maxAge: (60 * 60 * 1000), 
         sameSite: true, 

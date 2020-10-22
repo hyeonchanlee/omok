@@ -126,7 +126,6 @@ class App extends Component {
     authenticateUser = () => {
         instance.get('/user/authenticate')
             .then(res => {
-                console.log(res);
                 if(res.data.type === 'success') {
                     this.setState({
                         authenticated: true, 
