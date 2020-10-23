@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.29fab3b8.chunk.css",
+    "main.css": "/static/css/main.dd131bd4.chunk.css",
     "main.js": "/static/js/main.b00f78b5.chunk.js",
     "main.js.map": "/static/js/main.b00f78b5.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.09b85ec0.js",
@@ -8,9 +8,9 @@
     "static/js/2.779f1679.chunk.js": "/static/js/2.779f1679.chunk.js",
     "static/js/2.779f1679.chunk.js.map": "/static/js/2.779f1679.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.adf77bb385e236aebf8641c77352ccf9.js": "/precache-manifest.adf77bb385e236aebf8641c77352ccf9.js",
+    "precache-manifest.1b901a6adbfb3aa840d95a9ebe665244.js": "/precache-manifest.1b901a6adbfb3aa840d95a9ebe665244.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.29fab3b8.chunk.css.map": "/static/css/main.29fab3b8.chunk.css.map",
+    "static/css/main.dd131bd4.chunk.css.map": "/static/css/main.dd131bd4.chunk.css.map",
     "static/js/2.779f1679.chunk.js.LICENSE.txt": "/static/js/2.779f1679.chunk.js.LICENSE.txt",
     "static/media/fonts.css": "/static/media/Louis George Cafe.a617b62c.ttf",
     "static/media/board.css": "/static/media/board.8b67dc09.jpg"
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.09b85ec0.js",
     "static/js/2.779f1679.chunk.js",
-    "static/css/main.29fab3b8.chunk.css",
+    "static/css/main.dd131bd4.chunk.css",
     "static/js/main.b00f78b5.chunk.js"
   ]
 }
