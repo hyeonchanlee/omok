@@ -54,9 +54,10 @@
 }
 
 ._navbar .menu_item {
-    padding: 12px 15px;
+    margin: 1px;
+    padding: 10px 15px;
     width: 100%;
-    border-top: 0.5px solid var(--white);
+    border: 1px solid var(--white);
     border-radius: 5px;
     background-color: var(--black);
     text-decoration: none;

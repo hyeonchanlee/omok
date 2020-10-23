@@ -1,9 +1,15 @@
 ._home {
     display: flex;
     flex-grow: 1;
+    background-color: var(--black);
+}
+
+._home .wrapper {
+    display: flex;
     margin: 0 auto;
     padding: 20px;
     width: 1000px;
+    color: var(--white);
 }
 
 ._home .column {
@@ -21,7 +27,7 @@
     height: 100px;
     border: none;
     border-radius: 10px;
-    background-color: var(--black);
+    background-color: var(--gray60);
     text-decoration: none;
     font-size: 20px;
     color:var(--white);
@@ -29,7 +35,7 @@
 }
 
 ._home .play:hover {
-    background-color: var(--gray60);
+    background-color: var(--gray50);
     cursor: pointer;
 }
 

@@ -1,10 +1,16 @@
 ._profile {
     display: flex;
     flex-grow: 1;
+    background-color: var(--black);
+}
+
+._profile .wrapper {
+    display: flex;
     flex-direction: column;
     margin: 0 auto;
     padding: 40px;
     width: 1000px;
+    color: var(--white);
 }
 
 ._profile .body {
@@ -35,9 +41,10 @@
     align-self: flex-start;
     margin: 20px 0;
     padding: 10px 15px;
-    border: 1px solid var(--black);
+    border: 1px solid var(--white);
     border-radius: 5px;
     background-color: transparent;
+    color: var(--white);
     transition: 0.3s;
 }
 

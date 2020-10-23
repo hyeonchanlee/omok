@@ -24,34 +24,36 @@ class Profile extends Component {
 
         return (
             <div className='_profile'>
-                <PopUp 
-                    when={deleteAcc}
-                    message='Do you really want to delete your account?'
-                    acceptText='Delete'
-                    onAccept={() => { 
-                        deleteUser(); 
-                        this.setState({ deleteAcc: false }); 
-                    }}
-                    rejectText='Cancel'
-                    onReject={() => this.setState({ deleteAcc: false })}
-                />
-                <h1>Profile</h1>
-                <div className='body'>
-                    <i className='fas fa-user-circle icon'></i>
-                    <div className='column'>
-                        <h2>{user.username}</h2>
-                        <p>Name: {user.name}</p>
-                        <p>Email: {user.email}</p>
-                        <Alert 
-                            type={this.props.alert.type}
-                            message={this.props.alert.message}
-                        />
-                        <button 
-                            className='delete'
-                            onClick={() => this.setState({ deleteAcc: true })}
-                        >
-                            Delete Account
-                        </button>
+                <div className='wrapper'>
+                    <PopUp 
+                        when={deleteAcc}
+                        message='Do you really want to delete your account?'
+                        acceptText='Delete'
+                        onAccept={() => { 
+                            deleteUser(); 
+                            this.setState({ deleteAcc: false }); 
+                        }}
+                        rejectText='Cancel'
+                        onReject={() => this.setState({ deleteAcc: false })}
+                    />
+                    <h1>Your Profile</h1>
+                    <div className='body'>
+                        <i className='fas fa-user-circle icon'></i>
+                        <div className='column'>
+                            <h2>{user.username}</h2>
+                            <p>Name: {user.name}</p>
+                            <p>Email: {user.email}</p>
+                            <Alert 
+                                type={this.props.alert.type}
+                                message={this.props.alert.message}
+                            />
+                            <button 
+                                className='delete'
+                                onClick={() => this.setState({ deleteAcc: true })}
+                            >
+                                Delete Account
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
