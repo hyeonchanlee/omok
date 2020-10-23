@@ -65,13 +65,13 @@
 }
 
 @media (max-width: 1000px) {
-    ._home {
+    ._home .wrapper {
         width: 100%;
     }
 }
 
 @media (max-width: 600px) {
-    ._home {
+    ._home .wrapper {
         flex-direction: column;
     }
 

@@ -55,7 +55,7 @@
 }
 
 @media (max-width: 1000px) {
-    ._profile {
+    ._profile .wrapper {
         width: 100%;
     }
 }
