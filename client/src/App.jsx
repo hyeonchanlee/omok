@@ -12,6 +12,7 @@ import Footer from './components/footer/footer.jsx';
 import Login from './pages/login/login.jsx';
 import Register from './pages/register/register.jsx';
 import Game from './pages/game/game.jsx';
+import Loading from './pages/loading/loading.jsx';
 import { AuthContext } from './contexts/auth.jsx';
 import { AlertContext } from './contexts/alert.jsx';
 
@@ -149,7 +150,7 @@ class App extends Component {
     }
 
     render() {
-        if(this.state.authenticated === null) return null;
+        if(this.state.authenticated === null) return <Loading />;
 
         const auth = {
             user: this.state.user, 
