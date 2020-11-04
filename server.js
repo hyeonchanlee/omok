@@ -53,7 +53,7 @@ app.use(cors(corsOptions));
 //     app.set('trust proxy', 1);
 // }
 
-app.set('trust proxy', 1);
+app.set('trust proxy', true);
 
 // Session Middleware
 app.use(session({
