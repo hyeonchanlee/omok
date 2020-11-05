@@ -53,14 +53,14 @@ app.use(cors(corsOptions));
 //     app.set('trust proxy', 1);
 // }
 
-app.set('trust proxy', true);
+// app.set('trust proxy', true);
 
 // Session Middleware
 app.use(session({
     secret: process.env.SESSION_SECRET || 'keyboard cat', 
     resave: false, 
     saveUninitialized: false, 
-    proxy: true, 
+    // proxy: true, 
     store: new MongoStore({ 
         mongooseConnection: mongoose.connection
     }), 
@@ -68,7 +68,7 @@ app.use(session({
         maxAge: (14 * 24 * 60 * 60 * 1000), 
         sameSite: true, 
         httpOnly: true, 
-        secure: process.env.NPM_CONFIG_PRODUCTION || false
+        // secure: process.env.NPM_CONFIG_PRODUCTION || false
     }
 }));
 
