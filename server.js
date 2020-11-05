@@ -58,14 +58,16 @@ app.use(session({
     secret: process.env.SESSION_SECRET || 'keyboard cat', 
     resave: true, 
     saveUninitialized: false, 
-    store: new MongoStore({ 
-        mongooseConnection: mongoose.connection
-    }), 
+    proxy: true, 
     cookie: {
         maxAge: (14 * 24 * 60 * 60 * 1000), 
-        // httpOnly: true, 
+        httpOnly: true, 
+        sameSite: true, 
         secure: process.env.NPM_CONFIG_PRODUCTION || false
-    }
+    }, 
+    store: new MongoStore({ 
+        mongooseConnection: mongoose.connection
+    })
 }));
 
 // Bodyparser Middleware
