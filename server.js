@@ -49,16 +49,16 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// Express Session
 if(process.env.NPM_CONFIG_PRODUCTION) {
     app.set('trust proxy', 1);
 }
-
-// Session Middleware
 app.use(session({
     secret: process.env.SESSION_SECRET || 'keyboard cat', 
     resave: true, 
     saveUninitialized: false, 
     proxy: true, 
+    rolling: true, 
     cookie: {
         maxAge: (14 * 24 * 60 * 60 * 1000), 
         httpOnly: true, 
@@ -70,11 +70,11 @@ app.use(session({
     })
 }));
 
-// Bodyparser Middleware
+// Bodyparser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Passport Middleware
+// Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
