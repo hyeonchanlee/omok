@@ -50,21 +50,19 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Express Session
-// if(process.env.NPM_CONFIG_PRODUCTION) {
-//     app.set('trust proxy', 1);
-// }
+if(process.env.NPM_CONFIG_PRODUCTION) {
+    app.set('trust proxy', 1);
+}
 app.use(session({
     secret: process.env.SESSION_SECRET || 'keyboard cat', 
     resave: true, 
     saveUninitialized: false, 
-    proxy: true, 
     rolling: true, 
     cookie: {
         maxAge: (14 * 24 * 60 * 60 * 1000), 
         httpOnly: true, 
         sameSite: true, 
-        secure: false
-        // secure: process.env.NPM_CONFIG_PRODUCTION || false
+        secure: process.env.NPM_CONFIG_PRODUCTION
     }, 
     store: new MongoStore({ 
         mongooseConnection: mongoose.connection
