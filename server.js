@@ -49,26 +49,22 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// if(process.env.NPM_CONFIG_PRODUCTION) {
-//     app.set('trust proxy', 1);
-// }
-
-// app.set('trust proxy', true);
+if(process.env.NPM_CONFIG_PRODUCTION) {
+    app.set('trust proxy', 1);
+}
 
 // Session Middleware
 app.use(session({
     secret: process.env.SESSION_SECRET || 'keyboard cat', 
-    resave: false, 
+    resave: true, 
     saveUninitialized: false, 
-    // proxy: true, 
     store: new MongoStore({ 
         mongooseConnection: mongoose.connection
     }), 
     cookie: {
         maxAge: (14 * 24 * 60 * 60 * 1000), 
-        sameSite: true, 
-        httpOnly: true, 
-        // secure: process.env.NPM_CONFIG_PRODUCTION || false
+        // httpOnly: true, 
+        secure: process.env.NPM_CONFIG_PRODUCTION || false
     }
 }));
 
