@@ -49,6 +49,10 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// Bodyparser
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Express Session
 if(process.env.NPM_CONFIG_PRODUCTION) {
     app.set('trust proxy', 1);
@@ -65,13 +69,10 @@ app.use(session({
         secure: process.env.NPM_CONFIG_PRODUCTION
     }, 
     store: new MongoStore({ 
-        mongooseConnection: mongoose.connection
+        mongooseConnection: mongoose.connection, 
+        ttl: 24 * 60 * 60
     })
 }));
-
-// Bodyparser
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // Passport
 app.use(passport.initialize());
