@@ -94,7 +94,6 @@ userRouter.post('/login', (req, res, next) => {
             });
         });
     })(req, res, next);
-    console.log(req.session);
 });
 
 userRouter.get('/logout', (req, res) => {
@@ -106,7 +105,6 @@ userRouter.get('/logout', (req, res) => {
 });
 
 userRouter.get('/authenticate', (req, res) => {
-    console.log(req.session);
     if(req.isAuthenticated()) {
         return res.send({
             type: 'success', 
