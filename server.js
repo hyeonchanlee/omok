@@ -49,13 +49,13 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Origin', req.headers.origin);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
-    next();
-});
+// app.use(function(req, res, next) {
+//     res.header('Access-Control-Allow-Credentials', true);
+//     res.header('Access-Control-Allow-Origin', req.headers.origin);
+//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//     res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+//     next();
+// });
 
 // Bodyparser
 app.use(express.json());
@@ -73,7 +73,7 @@ app.use(session({
     cookie: {
         maxAge: (14 * 24 * 60 * 60 * 1000), 
         httpOnly: true, 
-        sameSite: true, 
+        sameSite: 'none', 
         secure: process.env.NPM_CONFIG_PRODUCTION
     }, 
     store: new MongoStore({ 
