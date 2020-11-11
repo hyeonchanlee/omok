@@ -74,7 +74,7 @@ app.use(session({
     })
 }));
 
-app.use((req, res, next) => {
+app.use((req, _res, next) => {
     console.log(req.headers);
     console.log(req.session);
     next();
