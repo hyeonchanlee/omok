@@ -92,7 +92,7 @@ class App extends Component {
     }
 
     logoutUser = () => {
-        instance.get('/user/logout')
+        instance.post('/user/logout')
             .then(res => {
                 if(res.data.type === 'success') {
                     this.setState({
@@ -110,9 +110,7 @@ class App extends Component {
     deleteUser = () => {
         const { user } = this.state;
 
-        instance.post('/user/delete', {
-                user: user
-            })
+        instance.delete(`/user/delete/${user._id}`)
             .then(res => {
                 this.setAlert(res.data.type, res.data.message);
                 if(res.data.type === 'success') {
@@ -125,7 +123,7 @@ class App extends Component {
     }
 
     authenticateUser = () => {
-        instance.get('/user/authenticate')
+        instance.post('/user/authenticate')
             .then(res => {
                 if(res.data.type === 'success') {
                     this.setState({

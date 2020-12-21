@@ -28,7 +28,7 @@ function Players(props) {
                 }
             </div>
             <div className='player white'>
-                <p>{players[1] && players[1].username}</p>
+                <p>{players[1] ? players[1].username : 'Computer'}</p>
                 <p>
                     <i className='far fa-clock'></i> {formatTime(time[1])}
                 </p>

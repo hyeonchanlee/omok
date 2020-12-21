@@ -96,7 +96,7 @@ userRouter.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
-userRouter.get('/logout', (req, res) => {
+userRouter.post('/logout', (req, res) => {
     req.logout();
     res.send({
         type: 'success', 
@@ -104,7 +104,7 @@ userRouter.get('/logout', (req, res) => {
     });
 });
 
-userRouter.get('/authenticate', (req, res) => {
+userRouter.post('/authenticate', (req, res) => {
     if(req.isAuthenticated()) {
         return res.send({
             type: 'success', 
@@ -120,10 +120,8 @@ userRouter.get('/authenticate', (req, res) => {
     }
 });
 
-userRouter.post('/delete', (req, res) => {
-    const { user } = req.body;
-
-    User.deleteOne({ email: user.email })
+userRouter.delete('/delete/:id', (req, res) => {    
+    User.deleteOne({ _id: req.params.id })
         .then(() => {
             return res.send({
                 type: 'success', 

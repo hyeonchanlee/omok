@@ -108,6 +108,12 @@ class Game extends Component {
 
         this.socket.on('updateMatch', ({ room }) => {
             this.setState(room);
+
+            if(room.turn === 1 && !room.players[1]) {
+                this.socket.emit('playAIMove', {
+                    roomId: room.roomId
+                });
+            }
         })
         
         this.socket.on('endMatch', ({ room }) => {

@@ -36,12 +36,12 @@ function Room(props) {
         <div className='_room'>
             <Prompt 
                 when={winner === null}
-                message={'Are you sure you want to leave?'}
+                message={'You will lose this game if you leave now. Are you sure you want to leave?'}
             />
             <PopUp
                 when={winner !== null}
                 message={
-                    players && winner !== null && 
+                    players && winner !== null && players[winner] &&
                     players[winner]._id === user._id
                         ? 'You win!'
                         : 'You lose...'

@@ -11,8 +11,7 @@ function Board(props) {
 
     const playMove = (x, y) => {
         // Play the move if it is player's turn, and the board coordinate is empty
-        if(players[turn]._id === user._id
-            && board[x][y] === 'transparent') {
+        if(players[turn]._id === user._id && board[x][y] === 'transparent') {
             socket.emit('playMove', {
                 roomId: roomId, 
                 x: x, 

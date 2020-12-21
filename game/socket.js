@@ -1,6 +1,7 @@
 import socket from 'socket.io';
 
 import { checkWinCondition } from './gamelogic.js';
+import { minimax } from './minimax.js';
 
 const socketHandler = server => {
     const io = socket(server);
@@ -29,8 +30,6 @@ const socketHandler = server => {
         });
 
         socket.on('joinQueue', () => {
-            console.log(socket.id, ' joining queue!')
-
             socket.join('queue');
 
             socket.emit('joinedQueue');
@@ -48,14 +47,10 @@ const socketHandler = server => {
         });
 
         socket.on('leaveQueue', () => {
-            console.log(socket.id, ' leaving queue!');
-
             socket.leave('queue');
         });
 
         socket.on('joinMatch', ({ user, roomId }) => {
-            console.log(user.username, ' joining match ', roomId);
-
             socket.join(roomId);
 
             if(rooms[roomId] && rooms[roomId].players) {
@@ -77,9 +72,24 @@ const socketHandler = server => {
             }
         });
 
-        socket.on('leaveMatch', ({ roomId, user }) => {
-            console.log(user.username, ' leaving match');
+        socket.on('joinMatchAI', ({ user, roomId }) => {
+            socket.join(roomId);
 
+            rooms[roomId] = {
+                roomId: roomId, 
+                players: [ user ], 
+                time: [ 300, 300 ], 
+                board: Array(19).fill().map(() => Array(19).fill('transparent')), 
+                turn: 0, 
+                winner: null
+            };
+
+            io.to(roomId).emit('beginMatch', {
+                room: rooms[roomId]
+            });
+        });
+
+        socket.on('leaveMatch', ({ roomId, user }) => {
             if(rooms[roomId] && rooms[roomId].winner === null) {
                 rooms[roomId].winner = rooms[roomId].players[0]._id === user._id
                     ? 1
@@ -92,8 +102,6 @@ const socketHandler = server => {
         });
 
         socket.on('deleteMatch', ({ roomId }) => {
-            console.log('Deleting room ', roomId, ' from memory');
-
             const room = io.sockets.adapter.rooms[roomId];
             if(room) {
                 Object.keys(room.sockets).forEach(client => {
@@ -123,8 +131,6 @@ const socketHandler = server => {
         });
 
         socket.on('playMove', ({ roomId, x, y }) => {
-            console.log(socket._id, ' played move')
-
             rooms[roomId].board[x][y] = rooms[roomId].turn === 0
                 ? 'black'
                 : 'white';
@@ -137,6 +143,25 @@ const socketHandler = server => {
             }
             else {
                 rooms[roomId].turn = rooms[roomId].turn === 0 ? 1 : 0;
+                io.to(roomId).emit('updateMatch', {
+                    room: rooms[roomId]
+                });
+            }
+        });
+
+        socket.on('playAIMove', ({ roomId }) => {
+            const { val, move, x, y } = minimax(rooms[roomId].board, 2, 'white', true, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
+            rooms[roomId].board = move;
+            console.log(val);
+
+            if(checkWinCondition(rooms[roomId].board, 1, x, y)) {
+                rooms[roomId].winner = 1;
+                io.to(roomId).emit('endMatch', {
+                    room: rooms[roomId]
+                });
+            }
+            else {
+                rooms[roomId].turn = 0
                 io.to(roomId).emit('updateMatch', {
                     room: rooms[roomId]
                 });

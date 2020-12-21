@@ -57,6 +57,7 @@ app.use(express.urlencoded({ extended: true }));
 if(process.env.NPM_CONFIG_PRODUCTION) {
     app.set('trust proxy', 1);
 }
+
 app.use(session({
     secret: process.env.SESSION_SECRET || 'keyboard cat', 
     resave: true, 
@@ -64,7 +65,7 @@ app.use(session({
     rolling: true, 
     cookie: {
         maxAge: (14 * 24 * 60 * 60 * 1000), 
-        httpOnly: true, 
+        httpOnly: false, 
         sameSite: 'none', 
         secure: process.env.NPM_CONFIG_PRODUCTION
     }, 
