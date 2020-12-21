@@ -90,7 +90,7 @@ app.use('/user', userRouter);
 
 server.listen(PORT, err => {
     if(err) console.log('Error setting up server!');
-    else console.log('Server listeneing on Port', PORT);
+    else console.log('Server listeneing on Port...', PORT);
 });
 
 // Socket IO Handler
